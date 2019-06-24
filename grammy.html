@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+</head>
+<style>
+.class1{
+  background: #444;
+  color: #eee;
+}
+</style>
+<body>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+
+<div id="app">
+  <table>
+    <tr>
+      <th>序号</th>
+      <th>商品名称</th>
+      <th>商品价格</th>
+      <th>购买数量</th>
+      <th>操作</th>
+    </tr>
+    <tr v-for="iphone in iphones">
+      <td>{{iphone.id}}</td>
+      <td>{{iphone.name}}</td>
+      <td>{{iphone.price}}</td>
+      <td>
+        <button  v-bind:disabled="iphone.count === 0" @click="iphone.count-=1">-</button>
+        {{iphone.count}}
+        <button @click="iphone.count+=1">+</button>
+      </td>
+      <td>
+        <button @click="iphone.count=0">移除</button>
+      </td>
+    </tr>
+  </table>
+  {{total()}}
+</div>
+    
+<script>
+ var vm = new Vue({
+    el: '#app',
+  data:{
+    iphones:[
+      {
+        id:1,
+        name:'iphone8',
+        price:'5888',
+        count:0
+      },
+      {
+        id:2,
+        name:'iphone8s',
+        price:'6488',
+        count:0
+      },
+      {
+        id:3,
+        name:'iphonex',
+        price:'6888',
+        count:0
+      }
+    ]
+  },
+  methods:{
+    total:function(){
+      var totalp = 0;
+      for(var i =0,len = this.iphones.length;i<len;i++){
+        totalp+= this.iphones[i].price*this.iphones[i].count
+      }
+      return totalp;
+    }
+  }
+});
+
+</script>
+</body>
